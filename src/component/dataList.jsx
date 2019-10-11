@@ -1,12 +1,9 @@
 import React from 'react'
-// export default class List extends React.Component{
-//     render(){
-//         return(
-//             <div>list</div>
-//         )
-//     }
-// }
 import { Table, Divider, Tag } from 'antd';
+import 'whatwg-fetch'
+fetch('http://apis.juhe.cn/cook/query?key=27cd67fab918227f6aa1a789ea40b9e8&menu=%E8%A5%BF%E7%BA%A2%E6%9F%BF&rn=10&pn=3').then(res => {
+    console.log(res)
+})
 
 const columns = [
     {
