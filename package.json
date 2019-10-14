@@ -69,6 +69,7 @@
     "build": "node scripts/build.js",
     "test": "node scripts/test.js"
   },
+  "proxy": "http://apis.juhe.cn/cook/query?key=27cd67fab918227f6aa1a789ea40b9e8&",
   "eslintConfig": {
     "extends": "react-app"
   },

@@ -7,6 +7,7 @@ import { Breadcrumb, Menu, Icon } from 'antd';
 import Home from '../component/home.jsx'
 import List from '../component/dataList.jsx'
 import emitter from '../util/events';
+import Recipe from '../component/recipe.jsx'
 
 class Root extends React.Component {
   constructor(props) {
@@ -58,8 +59,8 @@ const data = [
   {
     type: 1,
     zIndex: 1,
-    name: '在线聊天',
-    path: 'chat'
+    name: '聚合菜谱',
+    path: 'recipe'
   },
   {
     type: 2,
@@ -161,7 +162,7 @@ class GlobalRouter extends React.Component {
     return (
       <div>
         <header>
-          React 后台管理系统
+          React
                 </header>
         <div className="sidebar">
           <TabBar />
@@ -170,9 +171,10 @@ class GlobalRouter extends React.Component {
           <Root />
           <Router history={history}>
             <Switch>
+              <Route exact path='/' component={Home} />
               <Route exact path='/home' component={Home} />
-              <Route exact path="/symbol" component={List} />
-              <Route exact path="/inbox" component={List} />
+              <Route path="/symbol" component={List} />
+              <Route path="/recipe" component={Recipe} />
             </Switch>
           </Router>
         </main>
