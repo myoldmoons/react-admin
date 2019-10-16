@@ -1,8 +1,9 @@
 import React from 'react'
 import 'whatwg-fetch'
-import { Input, Button, message } from 'antd';
-import './recipe.css'
+import { Input, Button, message, Select } from 'antd';
+import '../static/component.css'
 const { Search } = Input;
+const { Option } = Select;
 // fetch('&menu=红烧肉&pn=3').then(res => {
 //     console.log(res)
 // })
@@ -42,7 +43,8 @@ class DataView extends React.Component {
 export default class Recipe extends React.Component {
     state = {
         value: '',
-        list: []
+        list: [],
+        size: 10
     }
     componentWillMount() {
         this.setState({
@@ -54,12 +56,18 @@ export default class Recipe extends React.Component {
             value: event.target.value
         });
     }
+    handleChange(value) {
+        console.log(value)
+        this.setState({
+            size: value
+        })
+    }
     submits() {
         if (this.state.value == '') {
             message.warning('请输入菜名！')
             return;
         }
-        fetch('&menu=' + this.state.value + '&pn=2&rn=10').then(res => res.json()).then(res => {
+        fetch('&menu=' + this.state.value + '&pn=2&rn=' + this.state.size).then(res => res.json()).then(res => {
             console.log(res)
             this.setState({
                 list: res.result.data
@@ -81,6 +89,12 @@ export default class Recipe extends React.Component {
                         size='large'
                         onChange={this.inputChange.bind(this)}
                     />
+                    <span style={{ 'fontSize': '18px', 'marginLeft': '20px' }}>条数：</span>
+                    <Select defaultValue="10条" style={{ width: 120 }} size='large' onChange={this.handleChange.bind(this)}>
+                        <Option value="10">10条</Option>
+                        <Option value="20">20条</Option>
+                        <Option value="30">30条</Option>
+                    </Select>
                     <Button size='large' type="primary" onClick={this.submits.bind(this)} style={{ 'marginLeft': '10px' }}>搜索</Button>
                 </div>
                 {

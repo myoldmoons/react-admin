@@ -1,14 +1,16 @@
 import React from 'react';
 import { Router, Route, Switch } from 'react-router-dom'
 import { createBrowserHistory } from "history";
-import 'antd/dist/antd.css';
-import './index.css'
 import { Breadcrumb, Menu, Icon } from 'antd';
-import Home from '../component/home.jsx'
-import List from '../component/dataList.jsx'
+// import Home from '../component/home.jsx'
 import emitter from '../util/events';
-import Recipe from '../component/recipe.jsx'
-
+import data from './menu.js'
+import routers from './router'
+import 'antd/dist/antd.css';
+import '../static/component.css'
+const history = createBrowserHistory()
+const { SubMenu } = Menu;
+// 面包屑组件
 class Root extends React.Component {
   constructor(props) {
     super(props);
@@ -41,64 +43,7 @@ class Root extends React.Component {
     )
   }
 }
-const history = createBrowserHistory()
-const { SubMenu } = Menu;
-const data = [
-  {
-    type: 1,
-    zIndex: 1,
-    name: '面板监控',
-    path: 'home'
-  },
-  {
-    type: 1,
-    zIndex: 1,
-    name: '数据列表',
-    path: 'symbol'
-  },
-  {
-    type: 1,
-    zIndex: 1,
-    name: '聚合菜谱',
-    path: 'recipe'
-  },
-  {
-    type: 2,
-    zIndex: 1,
-    name: '二级菜单1',
-    list: [
-      {
-        zIndex: 2,
-        name: '二级菜单1-1',
-        path: 'chat'
-      },
-      {
-        zIndex: 2,
-        name: '二级菜单1-2',
-        path: 'chat'
-      }
-    ]
-  },
-  {
-    type: 2,
-    zIndex: 1,
-    name: '二级菜单2',
-    list: [
-      {
-        zIndex: 2,
-        name: '二级菜单2-1',
-        path: 'chat'
-      },
-      {
-        zIndex: 2,
-        name: '二级菜单2-2',
-        path: 'chat'
-      }]
-  },
-
-
-]
-
+// 左菜单组件
 class TabBar extends React.Component {
   state = {
     collapsed: false,
@@ -157,7 +102,8 @@ class TabBar extends React.Component {
     );
   }
 }
-class GlobalRouter extends React.Component {
+// 路由匹配
+export default class GlobalRouter extends React.Component {
   render() {
     return (
       <div>
@@ -171,10 +117,11 @@ class GlobalRouter extends React.Component {
           <Root />
           <Router history={history}>
             <Switch>
-              <Route exact path='/' component={Home} />
-              <Route exact path='/home' component={Home} />
-              <Route path="/symbol" component={List} />
-              <Route path="/recipe" component={Recipe} />
+              <Route exact path='/' component={routers.Home} />
+              <Route exact path='/home' component={routers.Home} />
+              <Route path="/symbol" component={routers.List} />
+              <Route path="/recipe" component={routers.Recipe} />
+              <Route path="/editor" component={routers.Editor} />
             </Switch>
           </Router>
         </main>
@@ -183,4 +130,3 @@ class GlobalRouter extends React.Component {
     )
   }
 }
-export default GlobalRouter

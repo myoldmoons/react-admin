@@ -33,7 +33,7 @@ const columns = [
                         <Tag color={color} key={tag}>
                             {tag.toUpperCase()}
                         </Tag>
-                    );
+                    )
                 })}
             </span>
         ),
